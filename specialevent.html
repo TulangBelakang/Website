@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tulang Belakang</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Styling untuk carousel supaya gambar nampak cantik */
+        .carousel {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .carousel-item {
+            position: relative; /* Untuk letak badge */
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        /* Styling untuk badge supaya nampak lebih menarik & senget */
+        .badge-banner {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: red;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            transform: rotate(-20deg);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: Arial, sans-serif;
+            animation: pop 0.5s ease-in-out infinite alternate;
+        }
+        @keyframes pop {
+            0% { transform: rotate(-20deg) scale(1); }
+            100% { transform: rotate(-20deg) scale(1.1); }
+        }
+        .description {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        /* Styling untuk search highlight */
+        mark {
+            background-color: yellow;
+            color: black;
+        }
+    </style>
+</head>
+<body class="bg-success text-white">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Tulang Belakang</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                            ☰
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="sidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Menu</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="product.html">Products</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="delivery.html">Delivery Info</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="contactus.html">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">Special Event</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="signup.html">Log out</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- Poster Section -->
+<div class="container mt-5">
+    <div class="row">
+        <!-- Poster 1 -->
+        <div class="col-md-6">
+            <div class="poster-card">
+                <img src="poster1.jpeg" class="poster-img" alt="Poster 1">
+                <div class="overlay">
+                    <h3 class="poster-title">Limited-Time Offer!</h3>
+                    <p class="poster-text">Get amazing discounts on our products.</p>
+                    <a href="product.html" class="btn btn-warning fw-bold">Shop Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Poster 2 -->
+        <div class="col-md-6">
+            <div class="poster-card">
+                <img src="poster2.jpg" class="poster-img" alt="Poster 2">
+                <div class="overlay">
+                    <h3 class="poster-title">Flash Sale!</h3>
+                    <p class="poster-text">Our latest products are here! Don't miss out.</p>
+                    <a href="product.html" class="btn btn-warning fw-bold">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    /* Styling Poster */
+    .poster-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .poster-card:hover {
+        transform: scale(1.05);
+    }
+
+    .poster-img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Overlay effect */
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .poster-card:hover .overlay {
+        opacity: 1;
+    }
+
+    /* Styling tulisan */
+    .poster-title,
+    .poster-text,
+    .btn {
+        color: white;
+        text-align: center;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .poster-card:hover .poster-title,
+    .poster-card:hover .poster-text,
+    .poster-card:hover .btn {
+        transform: translateY(0);
+        opacity: 1;
+    }
+</style>
+
+
+
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-5 mt-5">
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Social Media Links -->
+            <div class="col-md-4 d-flex flex-column align-items-center">
+                <h5 class="mb-3">Follow Us</h5>
+                <div class="d-flex flex-column gap-3">
+                    <a href="https://instagram.com" class="text-white d-flex align-items-center gap-3 text-decoration-none">
+                        <i class="fab fa-instagram fa-2x text-danger"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://facebook.com" class="text-white d-flex align-items-center gap-3 text-decoration-none">
+                        <i class="fab fa-facebook fa-2x text-primary"></i>
+                        <span>Facebook</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-md-4 d-flex flex-column align-items-center">
+                <h5 class="mb-3">Contact Us</h5>
+                <p class="mb-1">
+                    <i class="fas fa-envelope text-warning"></i> info@tulangbelakang.com
+                </p>
+                <p>
+                    <i class="fas fa-phone text-success"></i> +6012-3456789
+                </p>
+            </div>
+
+            <!-- Address -->
+            <div class="col-md-4 d-flex flex-column align-items-center">
+                <h5 class="mb-3">Our Location</h5>
+                <p class="text-center">
+                    <i class="fas fa-map-marker-alt text-danger"></i>  
+                    123, Jalan Besar, 50000 Kuala Lumpur, Malaysia
+                </p>
+            </div>
+        </div>
+        
+        <!-- Copyright -->
+        <p class="mt-4 text-secondary">&copy; 2025 Tulang Belakang Sdn Bhd. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Font Awesome Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+
+    
+</body>
+</html> 

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tulang Belakang</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #28a745; /* Warna hijau */
+            color: white; /* Warna teks supaya lebih jelas */
+        }
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.2); /* Background separa lutsinar */
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Tulang Belakang</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="product.html">Back to Shop</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Shopping Cart</h2>
+        <table class="table table-bordered mt-3 bg-white text-dark">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price (RM)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items"></tbody>
+        </table>
+
+        <h4 class="text-end">Total: RM <span id="total-price">0.00</span></h4>
+        <div class="text-center">
+            <button class="btn btn-danger" onclick="clearCart()">Clear Cart</button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#paymentModal">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Modal for Payment -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalLabel">Payment Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <div class="mb-3">
+                            <label for="bankSelect" class="form-label">Select Bank</label>
+                            <select class="form-select" id="bankSelect">
+                                <option selected>Choose...</option>
+                                <option value="Maybank">Maybank</option>
+                                <option value="CIMB Bank">CIMB Bank</option>
+                                <option value="Public Bank">Public Bank</option>
+                                <option value="RHB Bank">RHB Bank</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="accountNumber" class="form-label">Account Number</label>
+                            <input type="text" class="form-control" id="accountNumber" placeholder="Enter account number">
+                        </div>
+                        <h5 class="text-end">Total Payment: RM <span id="modal-total-price">0.00</span></h5>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelPayment">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="approvePayment()">Approve Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsContainer = document.getElementById('cart-items');
+            let totalPrice = 0;
+
+            cartItemsContainer.innerHTML = '';
+
+            cart.forEach((item, index) => {
+                let row = `
+                    <tr class="cart-item">
+                        <td><img src="${item.image}" alt="${item.name}"></td>
+                        <td>${item.name}</td>
+                        <td>RM ${item.price.toFixed(2)}</td>
+                        <td><button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remove</button></td>
+                    </tr>
+                `;
+                cartItemsContainer.innerHTML += row;
+                totalPrice += item.price;
+            });
+
+            document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+            document.getElementById('modal-total-price').textContent = totalPrice.toFixed(2);
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function clearCart() {
+            localStorage.removeItem('cart');
+            loadCart();
+        }
+        function approvePayment() {
+    let bank = document.getElementById('bankSelect').value;
+    let accountNumber = document.getElementById('accountNumber').value;
+
+    if (bank === "Choose..." || accountNumber === "") {
+        alert("Please select a bank and enter an account number!");
+        return;
+    }
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    // Simpan info pembayaran
+    let paymentInfo = {
+        bank: bank,
+        accountNumber: accountNumber,
+        cart: cart,
+        total: document.getElementById('total-price').textContent
+    };
+    localStorage.setItem('deliveryInfo', JSON.stringify(paymentInfo));
+
+    alert(`Payment Approved!\nBank: ${bank}\nAccount Number: ${accountNumber}`);
+
+    
+    clearCart();
+
+    // Tutup modal
+    let paymentModal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+    paymentModal.hide();
+
+    // Arahkan ke halaman Delivery Info
+    window.location.href = "delivery.html";
+}
+
+
+
+        // Pastikan butang "Cancel" betul-betul tutup modal
+        document.getElementById('cancelPayment').addEventListener('click', function () {
+            let paymentModal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+            paymentModal.hide();
+        });
+
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
+</html>

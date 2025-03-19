@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tulang Belakang</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #28a745;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+        }
+        .btn-custom {
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-custom img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        .toggle-form {
+            cursor: pointer;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .popup span {
+            font-size: 24px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup" id="success-popup">
+        <span>&#10004;</span> Signup Successful!
+    </div>
+    <div class="form-container">
+        <h2 id="form-title">Sign Up</h2>
+
+        
+        <form id="signup-form" onsubmit="handleSignup(event)">
+            <div class="mb-3">
+                <label for="signup-email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="signup-email" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-3">
+                <label for="signup-password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="signup-password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Sign Up</button>
+        </form>
+
+        <form id="login-form" style="display: none;" onsubmit="handleLogin(event)">
+            <div class="mb-3">
+                <label for="login-email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="login-email" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-3">
+                <label for="login-password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="login-password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+
+        <p id="form-toggle">Already a member? <span class="toggle-form" onclick="toggleForm()">Login</span></p>
+
+        <hr>
+        <button class="btn btn-outline-dark btn-custom">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" width="30">Continue with Google
+        </button>
+        <button class="btn btn-outline-primary btn-custom">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook Logo">Continue with Facebook
+        </button>
+    </div>
+
+    
+    
+    <script>
+        function toggleForm() {
+            const signupForm = document.getElementById("signup-form");
+            const loginForm = document.getElementById("login-form");
+            const formTitle = document.getElementById("form-title");
+            const formToggle = document.getElementById("form-toggle");
+
+            if (signupForm.style.display === "none") {
+                signupForm.style.display = "block";
+                loginForm.style.display = "none";
+                formTitle.innerText = "Sign Up";
+                formToggle.innerHTML = "Already a member? <span class='toggle-form' onclick='toggleForm()'>Login</span>";
+            } else {
+                signupForm.style.display = "none";
+                loginForm.style.display = "block";
+                formTitle.innerText = "Login";
+                formToggle.innerHTML = "New here? <span class='toggle-form' onclick='toggleForm()'>Sign Up</span>";
+            }
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            document.getElementById("success-popup").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("success-popup").style.display = "none";
+                toggleForm();
+            }, 2000);
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

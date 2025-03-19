@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tulang Belakang</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .carousel {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-success text-white">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Tulang Belakang</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">
+                            <i class="bi bi-cart"></i> Cart (<span id="cart-count">0</span>)
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                            ☰ Menu
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="sidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Menu</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">Products</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="delivery.html">Delivery Info</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="contactus.html">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="specialevent.html">Special Event</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="signup.html">Log out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container text-center mt-5">
+        <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="exclusive socks.jpeg" class="d-block product-img" alt="Exclusive Pack">
+                </div>
+                <div class="carousel-item">
+                    <img src="custom socks.jpeg" class="d-block product-img" alt="Premium Pack">
+                </div>
+                <div class="carousel-item">
+                    <img src="luxury socks.jpeg" class="d-block product-img" alt="Deluxe Pack">
+                </div>
+                <div class="carousel-item">
+                    <img src="designersocks.jpeg" class="d-block product-img" alt="Design Socks">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+
+        <p class="mt-3">Socks Name: <strong id="bundle-name">Exclusive Pack</strong></p>
+        <button class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
+    </div>
+
+  <!-- Footer -->
+<footer class="bg-dark text-white text-center py-5 mt-5">
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Social Media Links -->
+            <div class="col-md-4 d-flex flex-column align-items-center">
+                <h5 class="mb-3">Follow Us</h5>
+                <div class="d-flex flex-column gap-3">
+                    <a href="https://instagram.com" class="text-white d-flex align-items-center gap-3 text-decoration-none">
+                        <i class="fab fa-instagram fa-2x text-danger"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://facebook.com" class="text-white d-flex align-items-center gap-3 text-decoration-none">
+                        <i class="fab fa-facebook fa-2x text-primary"></i>
+                        <span>Facebook</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-md-4 d-flex flex-column align-items-center">
+                <h5 class="mb-3">Contact Us</h5>
+                <p class="mb-1">
+                    <i class="fas fa-envelope text-warning"></i> info@tulangbelakang.com
+                </p>
+                <p>
+                    <i class="fas fa-phone text-success"></i> +6012-3456789
+                </p>
+            </div>
+
+            <!-- Address -->
+            <div class="col-md-4 d-flex flex-column align-items-center">
+                <h5 class="mb-3">Our Location</h5>
+                <p class="text-center">
+                    <i class="fas fa-map-marker-alt text-danger"></i>  
+                    123, Jalan Besar, 50000 Kuala Lumpur, Malaysia
+                </p>
+            </div>
+        </div>
+        
+        <!-- Copyright -->
+        <p class="mt-4 text-secondary">&copy; 2025 Tulang Belakang Sdn Bhd. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Font Awesome Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+
+
+    <script>
+        function addToCart() {
+            let activeItem = document.querySelector('.carousel-item.active img');
+            let productName = activeItem.alt; 
+            let productImage = activeItem.src;
+
+            let productPrice = 0;
+            if (productName === "Exclusive Pack") productPrice = 29.99;
+            else if (productName === "Premium Pack") productPrice = 39.99;
+            else if (productName === "Deluxe Pack") productPrice = 49.99;
+            else if (productName === "Design Socks") productPrice = 70.00;
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ name: productName, image: productImage, price: productPrice });
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            updateCartCount();
+            alert(`${productName} added to cart!`);
+        }
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function updateBundleName() {
+            let activeItem = document.querySelector('.carousel-item.active img');
+            document.getElementById('bundle-name').textContent = activeItem.alt;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+            let carousel = document.getElementById('productCarousel');
+            carousel.addEventListener('slid.bs.carousel', updateBundleName);
+        });
+    </script>
+</body>
+</html>
